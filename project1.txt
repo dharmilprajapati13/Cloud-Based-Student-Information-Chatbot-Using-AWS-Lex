@@ -1,0 +1,179 @@
+'use strict'
+const AWS = require('aws-sdk');
+var docClient = new  AWS.DynamoDB.DocumentClient();
+
+var tableName = "studenttable";
+var re;
+var id,name,add,pn,fees,att;
+exports.handler =  (event, context, callback) => {
+    var studentinformation = event.currentIntent.slots.StudentInformation;
+    var idnumber = event.currentIntent.slots.IdNumber;
+    
+    var params = {
+        TableName : tableName,
+        Key:{
+            "id" : idnumber
+        }  
+    }
+    if(studentinformation == "name"){
+        docClient.get(params,function(err,data){
+         if(err){
+         console.log(err)}
+         else{
+            re=JSON.stringify(data["Item"]["name"]).replace(/\"/g, "")
+         }
+         console.log(re)
+         callback(null,{
+        "dialogAction": {
+            "type": "Close",
+            "fulfillmentState": "Fulfilled",
+            "message": {
+                "contentType":"PlainText",
+                "content": "Name: " +re
+             }
+          }
+        
+        });
+      })
+        
+    }
+    if(studentinformation == "result"){
+        docClient.get(params,function(err,data){
+         if(err){
+         console.log(err)}
+         else{
+            re=JSON.stringify(data["Item"]["result"]).replace(/\"/g, "")
+         }
+         console.log(re)
+         callback(null,{
+        "dialogAction": {
+            "type": "Close",
+            "fulfillmentState": "Fulfilled",
+            "message": {
+                "contentType":"PlainText",
+                "content":"Result: " +re
+             }
+          }
+        
+        });
+      })
+        
+    }
+    if(studentinformation == "mobile number"){
+        docClient.get(params,function(err,data){
+         if(err){
+         console.log(err)}
+         else{
+            re=JSON.stringify(data["Item"]["phonenumber"]).replace(/\"/g, "")
+         }
+         console.log(re)
+         callback(null,{
+        "dialogAction": {
+            "type": "Close",
+            "fulfillmentState": "Fulfilled",
+            "message": {
+                "contentType":"PlainText",
+                "content":"Mobile Number: " +re
+             }
+          }
+        
+        });
+      })
+        
+    }
+    if(studentinformation == "address"){
+        docClient.get(params,function(err,data){
+         if(err){
+         console.log(err)}
+         else{
+            re=JSON.stringify(data["Item"]["address"]).replace(/\"/g, "")
+         }
+         console.log(re)
+         callback(null,{
+        "dialogAction": {
+            "type": "Close",
+            "fulfillmentState": "Fulfilled",
+            "message": {
+                "contentType":"PlainText",
+                "content":"Address: " +re
+             }
+          }
+        
+        });
+      })
+        
+    }
+   if(studentinformation == "attendance"){
+        docClient.get(params,function(err,data){
+         if(err){
+         console.log(err)}
+         else{
+            re=JSON.stringify(data["Item"]["attendance"]).replace(/\"/g, "")
+         }
+         console.log(re)
+         callback(null,{
+        "dialogAction": {
+            "type": "Close",
+            "fulfillmentState": "Fulfilled",
+            "message": {
+                "contentType":"PlainText",
+                "content":"Attendance: " +re
+             }
+          }
+        
+        });
+      })
+        
+    }
+    if(studentinformation == "fees"){
+        docClient.get(params,function(err,data){
+         if(err){
+         console.log(err)}
+         else{
+            re=JSON.stringify(data["Item"]["fees"]).replace(/\"/g, "")
+         }
+         console.log(re)
+         callback(null,{
+        "dialogAction": {
+            "type": "Close",
+            "fulfillmentState": "Fulfilled",
+            "message": {
+                "contentType":"PlainText",
+                "content":"Fees: " +re
+             }
+          }
+        
+        });
+      })
+        
+    }
+    if(studentinformation == "full details"){
+        docClient.get(params,function(err,data){
+         if(err){
+         console.log(err)}
+         else{
+             
+            id=JSON.stringify(data["Item"]["id"]).replace(/\"/g, "")
+            name=JSON.stringify(data["Item"]["name"]).replace(/\"/g, "")
+            add=JSON.stringify(data["Item"]["address"]).replace(/\"/g, "")
+            pn=JSON.stringify(data["Item"]["phonenumber"]).replace(/\"/g, "")
+            re=JSON.stringify(data["Item"]["result"]).replace(/\"/g, "")
+            fees=JSON.stringify(data["Item"]["fees"]).replace(/\"/g, "")
+            att=JSON.stringify(data["Item"]["attendance"]).replace(/\"/g, "")
+         }
+         console.log(re)
+         callback(null,{
+        "dialogAction": {
+            "type": "Close",
+            "fulfillmentState": "Fulfilled",
+            "message": {
+                "contentType":"PlainText",
+                "content":"ID: " +id + ", Name:  " +name + ", Address: "+add + ", Mobile Number: " +pn +", Result: " +re +", Fees: " +fees + ", Attendance: " + att
+             }
+          }
+        
+        });
+      })
+        
+    }
+};

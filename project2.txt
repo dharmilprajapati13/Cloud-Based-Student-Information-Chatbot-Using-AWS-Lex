@@ -1,0 +1,61 @@
+'use strict'
+const AWS = require('aws-sdk');
+
+exports.handler =  (event, context, callback) => {
+    var info = event.currentIntent.slots.info;
+    if(info == "website link"){
+        callback(null,{
+            "dialogAction": {
+                "type": "Close",
+                "fulfillmentState": "Fulfilled",
+                "message": {
+                   "contentType":"PlainText",
+                    "content":"https://charusat.ac.in/"
+                }
+            }
+        
+        });
+    }
+    else if(info == "fees link"){
+        callback(null,{
+            "dialogAction": {
+                "type": "Close",
+                "fulfillmentState": "Fulfilled",
+                "message": {
+                   "contentType":"PlainText",
+                    "content":"http://117.239.83.200:912/FeesPaymentApp/"
+                }
+            }
+        
+        });
+    }
+    else if(info == "result link"){
+        callback(null,{
+            "dialogAction": {
+                "type": "Close",
+                "fulfillmentState": "Fulfilled",
+                "message": {
+                   "contentType":"PlainText",
+                    "content":"http://117.239.83.200:2020/"
+                }
+            }
+        
+        });
+    }
+    else if(info == "departments"){
+        callback(null,{
+            "dialogAction": {
+                "type": "Close",
+                "fulfillmentState": "Fulfilled",
+                "message": {
+                   "contentType":"PlainText",
+                    "content":"1)B.Tech 2)BSC 3)BBA 4)MBA 5) Nursing 6)Physiotherapy"
+                }
+            }
+        
+        });
+    }
+        
+ }
+    
+
